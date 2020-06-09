@@ -1,4 +1,3 @@
-import torch
 from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
 import modules.Classifier
@@ -39,3 +38,6 @@ def classify():
         # return redirect(url_for('uploaded_file',
         #                         filename=filename))
     return ''
+
+if __name__ == "__main__":
+    app.run()
