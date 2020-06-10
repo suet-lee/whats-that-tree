@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
-import modules.Classifier
+import .modules.Classifier
 # from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__)
