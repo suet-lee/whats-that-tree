@@ -1,4 +1,5 @@
 from fastai.vision import *
+import pathlib
 
 def get_class(idx):
     types = [
@@ -20,7 +21,8 @@ def get_class(idx):
     return types[idx]
 
 def classify(file):
-    learn = load_learner("app/modules", 'export.pkl')
+    path = pathlib.Path(__file__).parent.absolute()
+    learn = load_learner(path, 'export.pkl')
     pred_class,pred_idx,outputs = learn.predict(file.read())
     print(pred_class)
     return pred_class
