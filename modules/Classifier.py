@@ -20,7 +20,7 @@ def get_class(idx):
     return types[idx]
 
 def classify(file):
-    learn = load_learner(".", 'export.pkl')
+    learn = load_learner("modules", 'export.pkl')
     pred_class,pred_idx,outputs = learn.predict(file.read())
     print(pred_class)
     return pred_class
