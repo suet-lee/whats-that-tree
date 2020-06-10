@@ -8,9 +8,6 @@ app.secret_key = "super secret key"
 
 @app.route('/')
 def index():
-    a = Classifier.get_class(2)
-    print(a)
-    flash('Test')
     return render_template('test.html')
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
