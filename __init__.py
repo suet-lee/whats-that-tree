@@ -32,8 +32,7 @@ def classify():
         filename = secure_filename(file.filename)
         path = os.path.join("tmp", filename)
         file.save(path)
-        img = open_image(path)
-        return Classifier.classify(img)
+        result = Classifier.classify(path)
 
         return filename
         # return redirect(url_for('uploaded_file',
