@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 # from werkzeug.datastructures import FileStorage
 from .modules import Classifier
 import os
+import pathlib
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
@@ -30,11 +31,11 @@ def classify():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        path = os.path.join("tmp", filename)
-        file.save(path)
+        path_abs = pathlib.Path(__file__).parent.absolute()
+        path = os.path.join(path_abs, "tmp", filename)
         result = Classifier.classify(path)
 
-        return filename
+        return path
         # return redirect(url_for('uploaded_file',
         #                         filename=filename))
     return ''
