@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect
 from werkzeug.utils import secure_filename
-from .modules import Classifier
 # from werkzeug.datastructures import FileStorage
+from .modules import Classifier
+import os
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
@@ -26,10 +27,13 @@ def classify():
     if file.filename == '':
         flash('No selected file!')
         return redirect('/')
+
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        print(filename)
-        return Classifier.classify(file)
+        path = os.path.join("tmp", filename)
+        file.save(path)
+        img = open_image(path)
+        return Classifier.classify(img)
 
         return filename
         # return redirect(url_for('uploaded_file',

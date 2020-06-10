@@ -20,9 +20,9 @@ def get_class(idx):
     ]
     return types[idx]
 
-def classify(file):
+def classify(img):
     path = pathlib.Path(__file__).parent.absolute()
     learn = load_learner(path, 'export.pkl')
-    pred_class,pred_idx,outputs = learn.predict(file.read())
+    pred_class,pred_idx,outputs = learn.predict(img)
     print(pred_class)
     return pred_class
