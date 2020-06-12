@@ -13,8 +13,8 @@ TYPES = [
     'maple tree',
     'oak tree',
     'scots pine tree',
-    'spruce tree',
     'white poplar tree',
+    'spruce tree',
     'willow tree'
 ]
 
