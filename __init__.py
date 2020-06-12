@@ -1,16 +1,17 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
-# from werkzeug.datastructures import FileStorage
 from .modules import Classifier
+from .modules.Logger import *
+from random import randint
 import os
-import pathlib
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 @app.route('/')
 def index():
-    return render_template('test.html')
+    return render_template('index.html')
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -18,10 +19,18 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def delete_file(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return True
+
+    log('[delete_file] File not found: %s' % file_path)
+    return False
+
 @app.route('/classify', methods=['POST'])
 def classify():
     if 'file' not in request.files:
-        flash('Error occurred!')
+        flash('An error occurred!')
         return redirect('/')
 
     file = request.files['file']
@@ -31,14 +40,33 @@ def classify():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        path_abs = pathlib.Path(__file__).parent.absolute()
-        path = os.path.join(path_abs, "tmp", filename)
+        path = os.path.join(app.root_path, "tmp", filename)
+        file.save(path)
         result = Classifier.classify(path)
+        delete_file(path)
+        return redirect(url_for('tree', tree=result))
 
-        return path
-        # return redirect(url_for('uploaded_file',
-        #                         filename=filename))
-    return ''
+    flash('An error occurred!')
+    return redirect('/')
+
+@app.route('/tree/<tree>')
+def details(tree):
+    data = {
+        'tree': tree,
+        'name': Classifier.TYPES[int(tree)].capitalize(),
+        'descript': Classifier.DESCRIPTION[int(tree)]
+    }
+    return render_template('details.html', data=data)
+
+@app.route('/random')
+def random():
+    tree = randint(0, 13)
+    return redirect(url_for('details', tree=tree))
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == "__main__":
     app.run()

@@ -2,3 +2,5 @@ __pycache__
 **/*.pyc
 *.wsgi
 run.sh
+app.log
+tmp

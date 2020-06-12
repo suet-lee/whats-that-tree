@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
+  </head>
+
+  <body>
+      <div id="details" class="container">
+          <div class="inner">
+              <h2>What's that tree?</h2>
+              <div class="image">
+                  <img src="{{ url_for('static', filename = '/images/trees/'+data.tree+'.jpg') }}">
+              </div>
+              <h4>{{ data.name }}</h4>
+              <p>{{ data.descript }}</p>
+              <p class="tag">~ from source: <a href="https://www.lwtreecare.co.uk/common-uk-trees">LW Treecare</a></p>
+              <div class="btns">
+                  <a href="/random" class="btn"><button>Random tree!</button></a>
+                  <a href="/" class="btn"><button>Check again</button></a>
+              </div>
+          </div>
+        </div>
+    </body>
+
+    <footer>
+        <p>Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+    </footer>
+
+</html>

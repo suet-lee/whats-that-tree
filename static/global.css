@@ -1,1 +1,23 @@
-.hide { display: none; }
+* { font-family: 'Arial'; }
+body { background-color: #d0e0bc; }
+.container { display: flex; }
+.container .inner { margin: auto; }
+.container h2 { text-align: center; font-family: 'Courier New', 'Arial'; }
+button { border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; font-size: 15px; letter-spacing: 1.5px; }
+button:hover { cursor: pointer; }
+footer p { text-align: center; color: #fff; font-size: 10px; margin-top: 100px; }
+
+#index .inner { margin-top: 50px; }
+#index img { width: 300px; }
+#index form { text-align: center; }
+#index input { border: 1px solid #fff; border-radius: 2px; padding: 5px; margin-top: 14px; }
+#index .flash p { text-align: center; }
+
+#details .inner { max-width: 400px; }
+#details .image { max-width: 400px; display: flex; }
+#details img { max-width: 100%; max-height: 300px; margin: auto; }
+#details h4 { font-size: 16px; }
+#details p { font-size: 14px; }
+#details .tag { font-size: 10px; }
+#details .btns { display: flex; margin-top: 20px; }
+#details .btns .btn { margin: auto; }
