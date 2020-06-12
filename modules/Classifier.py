@@ -1,5 +1,4 @@
 from fastai.vision import *
-import pathlib
 
 TYPES = [
     'alder tree',

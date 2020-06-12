@@ -1,4 +1,5 @@
 import logging
+import pathlib
 
 class MyFilter(object):
     def __init__(self, level):
@@ -8,7 +9,8 @@ class MyFilter(object):
         return logRecord.levelno >= self.__level
 
 logger = logging.getLogger('default')
-handler = logging.FileHandler('app.log')
+path = os.path.join(pathlib.Path(__file__).parent.absolute(), "app.log")
+handler = logging.FileHandler(path)
 handler.addFilter(MyFilter(logging.ERROR))
 formatter = logging.Formatter('%(asctime)s %(message)s')
 handler.setFormatter(formatter)
