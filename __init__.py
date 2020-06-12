@@ -44,7 +44,7 @@ def classify():
         file.save(path)
         result = Classifier.classify(path)
         delete_file(path)
-        return redirect(url_for('tree', tree=result))
+        return redirect(url_for('details', tree=result))
 
     flash('An error occurred!')
     return redirect('/')
