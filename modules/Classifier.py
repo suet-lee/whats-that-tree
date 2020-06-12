@@ -35,12 +35,9 @@ DESCRIPTION = [
     "Like the oak, the willow is a recognisable British emblem. There are numerous willow varieties in the UK including hybrids of the common species. The famous weeping willow, for example, is a hybrid of Chinese and European variants. The wood of the UK native white willow is used for making cricket bats."
 ]
 
-def get_class(idx):
-    return TYPES[idx]
-
 def classify(img_path):
     path = pathlib.Path(__file__).parent.absolute()
     learn = load_learner(path, 'export.pkl')
     img = open_image(img_path)
     pred_class,pred_idx,outputs = learn.predict(img)
-    return pred_class
+    return pred_idx.int()
