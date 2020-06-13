@@ -46,6 +46,7 @@ def classify():
         filename = secure_filename(file.filename)
         path = os.path.join(app.root_path, "tmp", filename)
         file.save(path)
+        error = False
         try:
             result = Classifier.classify(path)
         except:
