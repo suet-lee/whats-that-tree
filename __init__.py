@@ -3,11 +3,16 @@ from werkzeug.utils import secure_filename
 from .modules import Classifier
 from .modules.Logger import *
 from random import randint
+from os import environ
 import os
 
 app = Flask(__name__)
-app.secret_key = "super secret key"
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
+# app.secret_key = environ.get() #
+# app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 # Max image upload is 50MB
+app.config.update(
+    SECRET_KEY = environ.get('SECRET_KEY'),
+    MAX_CONTENT_LENGTH = 50 * 1024 * 1024
+)
 
 @app.route('/')
 def index():
@@ -42,7 +47,14 @@ def classify():
         filename = secure_filename(file.filename)
         path = os.path.join(app.root_path, "tmp", filename)
         file.save(path)
-        result = Classifier.classify(path)
+        try:
+            result = Classifier.classify(path)
+        except:
+            log('[classify] Error in classification')
+            flash('An error occurred!')
+            delete_file(path)
+            return redirect('/')
+
         delete_file(path)
         return redirect(url_for('details', tree=result))
 
@@ -58,11 +70,13 @@ def details(tree):
     }
     return render_template('details.html', data=data)
 
+# Displays random tree to user
 @app.route('/random')
 def random():
     tree = randint(0, 13)
     return redirect(url_for('details', tree=tree))
 
+# Adds website favicon image
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),

@@ -1,5 +1,7 @@
 from fastai.vision import *
-import pathlib
+from flask import current_app as app
+import os
+# import pathlib
 
 TYPES = [
     'alder tree',
@@ -36,7 +38,8 @@ DESCRIPTION = [
 ]
 
 def classify(img_path):
-    path = pathlib.Path(__file__).parent.absolute()
+    # path = pathlib.Path(__file__).parent.absolute()
+    path = os.path.join(app.root_path, "modules")
     learn = load_learner(path, 'export.pkl')
     img = open_image(img_path)
     pred_class,pred_idx,outputs = learn.predict(img)
