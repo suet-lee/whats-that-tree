@@ -3,7 +3,6 @@ from werkzeug.utils import secure_filename
 from .modules import Classifier
 from .modules.Logger import *
 from random import randint
-from os import environ
 import os
 
 app = Flask(__name__)
