@@ -51,11 +51,11 @@ def classify():
         except:
             log('[classify] Error in classification')
             flash('An error occurred!')
+        finally:
             delete_file(path)
-            return redirect('/')
 
-        delete_file(path)
-        return redirect(url_for('details', tree=result))
+        if is_integer(result):
+            return redirect(url_for('details', tree=result))
 
     flash('An error occurred!')
     return redirect('/')
