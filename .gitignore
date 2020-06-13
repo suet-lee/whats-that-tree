@@ -4,3 +4,4 @@ __pycache__
 run.sh
 app.log
 tmp
+.env
