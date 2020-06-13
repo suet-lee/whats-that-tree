@@ -19,5 +19,5 @@ See the jupyter notebook used for classification [here](https://github.com/suet-
 For more detail on how to deploy a flask app on server see [here]().
 
 ## TODO
-- Add feedback for incorrect classification (can be used for further training)
+- Add user feedback option for incorrect classification (can be used for further training)
 - Add classification based on flower, leaf, seeds etc.
