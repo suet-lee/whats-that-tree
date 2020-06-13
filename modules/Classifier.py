@@ -41,4 +41,5 @@ def classify(img_path):
     learn = load_learner(path, 'export.pkl')
     img = open_image(img_path)
     pred_class,pred_idx,outputs = learn.predict(img)
-    return pred_idx.item()
+    print(type(pred_idx.item()))
+    return int(pred_idx.item())

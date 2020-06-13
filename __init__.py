@@ -56,7 +56,7 @@ def classify():
             delete_file(path)
 
         if not error:
-            return redirect(url_for('details', tree=int(result)))
+            return redirect(url_for('details', tree=result))
 
     flash('An error occurred!')
     return redirect('/')
