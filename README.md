@@ -14,7 +14,7 @@ See the jupyter notebook used for classification [here](https://github.com/suet-
 - You will need to create a `tmp` folder in the root_directory, this is where uploaded images will be temporarily stored (and later deleted)
 - If you wish to use logging, you will need an `app.log` file in the root directory
 - The `app.log` file and `tmp` folder need write permissions:  
-`sudo chown www-data:www-data app.log`
+`sudo chown www-data:www-data app.log`  
 `sudo chown -R www-data:www-data tmp`
 
 For more detail on how to deploy a flask app on server see [here]().
