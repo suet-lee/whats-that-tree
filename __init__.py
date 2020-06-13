@@ -50,12 +50,12 @@ def classify():
             result = Classifier.classify(path)
         except:
             log('[classify] Error in classification')
-            flash('An error occurred!')
+            error = True
         finally:
             delete_file(path)
 
-        if is_integer(result):
-            return redirect(url_for('details', tree=result))
+        if !error:
+            return redirect(url_for('details', tree=int(result)))
 
     flash('An error occurred!')
     return redirect('/')
