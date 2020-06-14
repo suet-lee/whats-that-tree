@@ -6,8 +6,6 @@ from random import randint
 import os
 
 app = Flask(__name__)
-# app.secret_key = environ.get() #
-# app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 # Max image upload is 50MB
 app.config.update(
     SECRET_KEY = os.environ.get('SECRET_KEY'),
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024
